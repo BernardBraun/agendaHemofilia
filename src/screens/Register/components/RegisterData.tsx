@@ -113,13 +113,12 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: 'A / Leve' },
+            { key: '2', value: 'A / Moderada' },
+            { key: '3', value: 'A / Grave' },
+            { key: '4', value: 'B / Leve' },
+            { key: '5', value: 'B / Moderada' },
+            { key: '6', value: 'B / Grave' }
         ]
 
         return (
@@ -128,9 +127,9 @@ export default function FieldComponent() {
                 data={data}
                 save="value"
                 search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                boxStyles={{ borderColor: "#EB0102", width: "100%", height: 35, borderRadius: 6, }}
+                inputStyles={{ color: "#EB0102", fontWeight: "bold", paddingLeft: 0 }}
+                placeholder="Selecione o tipo de sua Hemofilia"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
 
@@ -143,15 +142,15 @@ export default function FieldComponent() {
         style={styles.container}
         keyboardVerticalOffset={20}>
             <ScrollView>
-            <Text style={styles.text}>Data / Hora</Text>
-            <FirstSelect />
-            <Text style={styles.text}>Unidade</Text>
-            <FirstSelect />
-            <Text style={styles.text}>Motivo da Infusão</Text>
-            <SecondSelect />
-            <Text style={styles.text}>Tipo / Local do Sangramento</Text>
-            <ThirdSelect />
-            <Text style={styles.text}>Tratamento</Text>
+            <Text style={styles.text}>Nome completo</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Idade</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Altura</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Peso</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Tipo da Hemofilia</Text>
             <FourthSelect />
             <Text style={styles.text}>Observações</Text>
             <TextInput 
@@ -182,8 +181,17 @@ const styles = StyleSheet.create({
         borderColor: "#EB0102",
         borderWidth: 1,
         borderRadius: 6,
-        width: screenDimensions.width,
+        width: "100%",
         height: 160,
+        color: "#EB0102",
+        textAlignVertical: "top",
+    },
+    textInputRegister: {
+        borderColor: "#EB0102",
+        borderWidth: 1,
+        borderRadius: 6,
+        width: "100%",
+        height: 30,
         color: "#EB0102",
         textAlignVertical: "top",
     },

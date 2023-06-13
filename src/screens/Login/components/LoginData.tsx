@@ -18,10 +18,6 @@ export default function LoginData() {
         alert('Criando conta');
     }
 
-    const linkGovBr = () => {
-        alert('Redirecionando ao Gov.br');
-    }
-
     return <SafeAreaView style={styles.view}>
         <Text style={styles.login}>Login:</Text>
         <TextInput inputMode='email' keyboardType='email-address' style={styles.field}/>
@@ -35,7 +31,6 @@ export default function LoginData() {
         <Text style={styles.newAccess}>Ainda não tem seu acesso?</Text>
         <View style={styles.buttonContainerB}>
             <ButtonComponent labelButton="Criar conta" onpress={createAccount} />
-            <ButtonComponent labelButton="Entrar com gov.br" onpress={linkGovBr} />
         </View>
         <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
     </SafeAreaView>
@@ -84,11 +79,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     buttonContainerB: {
-        justifyContent: "space-between",
         flexDirection: "row",
     },
     bottomText: {
-        paddingTop: 100,
+        paddingTop: 80,
         color: "#000000",
         fontSize: 6
     }

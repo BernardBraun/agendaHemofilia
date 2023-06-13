@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 const ButtonComponent = ({ labelButton, onpress}) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onpress}>
-        <Text>{labelButton}</Text>
+        <Text style={styles.buttonText}>{labelButton}</Text>
     </TouchableOpacity>
   )
 }
@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     fontWeight: 'bold'
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontWeight: "bold"
   }
 })
 
