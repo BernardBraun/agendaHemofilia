@@ -127,8 +127,8 @@ export default function FieldComponent() {
                 data={data}
                 save="value"
                 search={false}
-                boxStyles={{ borderColor: "#EB0102", width: "100%", height: 35, borderRadius: 6, }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold", paddingLeft: 0 }}
+                boxStyles={{ borderColor: "#EB0102", width: "100%", height: 45 }}
+                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
                 placeholder="Selecione o tipo de sua Hemofilia"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
@@ -144,25 +144,39 @@ export default function FieldComponent() {
             <ScrollView>
             <Text style={styles.text}>Nome completo</Text>
             <TextInput style={styles.textInputRegister}/>
-            <Text style={styles.text}>Idade</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Data de Nascimento</Text>
+            <TextInput inputMode="decimal" style={styles.textInputRegister } />
             <Text style={styles.text}>Altura</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
             <Text style={styles.text}>Peso</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
             <Text style={styles.text}>Tipo da Hemofilia</Text>
             <FourthSelect />
-            <Text style={styles.text}>Observações</Text>
-            <TextInput 
-                style={styles.textInput}
-                multiline={true}
-                numberOfLines={6}
-                keyboardType="default"
-            />
+            <Text style={styles.text}>Celular</Text>
+            <TextInput inputMode="tel" style={styles.textInputRegister}/>
+            <Text style={styles.text}>E-mail</Text>
+            <TextInput inputMode="email" style={styles.textInputRegister}/>
+            <Text style={styles.text}>Endereço</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Bairro</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Cidade</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Estado</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>CEP</Text>
+            <TextInput inputMode="numeric" style={styles.textInputRegister}/>
+            <Text style={styles.text}>Nome da Mãe</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Nome do Pai</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Hemocentro</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Telefone Hemocentro</Text>
+            <TextInput inputMode="tel" style={styles.textInputRegister}/>
             <View style={styles.buttonContainer}>
-                <ButtonComponent labelButton="Ver Calendário" onpress={clearField} />
-                <ButtonComponent labelButton="Voltar" onpress={loginApp} />
-                <ButtonComponent labelButton="Salvar" onpress={loginApp} />
+                <ButtonComponent labelButton="Sair" onpress={loginApp} />
+                <ButtonComponent labelButton="Cadastrar" onpress={loginApp} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
             </ScrollView>
@@ -171,7 +185,7 @@ export default function FieldComponent() {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        paddingHorizontal: 10
     },
     text: {
         color: "#EB0102",
@@ -193,17 +207,21 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 30,
         color: "#EB0102",
-        textAlignVertical: "top",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingLeft: 10,
+        paddingTop:0,
+        paddingBottom: -100
     },
     buttonContainer: {
         paddingTop: 15,
         paddingBottom: 6,
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-evenly"
     },
     bottomText: {
         paddingTop: 30,
-        paddingLeft: 10,
+        paddingLeft: 5,
         color: "#000000",
         fontSize: 6
     }
