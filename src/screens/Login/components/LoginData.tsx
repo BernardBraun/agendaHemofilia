@@ -20,9 +20,9 @@ export default function LoginData() {
 
     return <SafeAreaView style={styles.view}>
         <Text style={styles.login}>Login:</Text>
-        <TextInput inputMode='email' keyboardType='email-address' style={styles.field}/>
+        <TextInput inputMode='email' blurOnSubmit={true} keyboardType='email-address' style={styles.field}/>
         <Text style={styles.password}>Senha:</Text>
-        <TextInput textContentType='password' style={styles.field}/>
+        <TextInput secureTextEntry={true} blurOnSubmit={true} textContentType='password' style={styles.field}/>
         <View style={styles.buttonContainerA}>
             <ButtonComponent labelButton="Limpar" onpress={clearField} />
             <ButtonComponent labelButton="Entrar" onpress={loginApp} />
@@ -30,7 +30,7 @@ export default function LoginData() {
         <View style={styles.lineBreak} />
         <Text style={styles.newAccess}>Ainda não tem seu acesso?</Text>
         <View style={styles.buttonContainerB}>
-            <ButtonComponent labelButton="Criar conta" onpress={createAccount} />
+            <ButtonComponent labelButton="Crie sua conta aqui" onpress={createAccount} />
         </View>
         <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
     </SafeAreaView>
@@ -44,19 +44,19 @@ const styles = StyleSheet.create({
     },
     login: {
         fontSize: 18,
-        color: "#000000",
+        color: "#EB0102",
         fontWeight: "bold"
     },
     password: {
         fontSize: 18,
-        color: "#000000",
+        color: "#EB0102",
         fontWeight: 'bold'
     },
     field: {
         borderWidth: 1,
         borderColor: "#EB0102",
         borderRadius: 6,
-        color: "#000000",
+        color: "#EB0102",
         paddingBottom: 10
     },
     lineBreak: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     newAccess: {
-        color: "#000000",
+        color: "#999999",
         fontSize: 16,
         marginVertical: 16,
         fontWeight: "bold"
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     bottomText: {
-        paddingTop: 80,
+        paddingTop: 100,
         color: "#000000",
         fontSize: 6
     }
