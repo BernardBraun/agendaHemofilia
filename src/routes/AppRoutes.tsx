@@ -10,13 +10,16 @@ import Register from "../screens/Register";
 import BleedInform from "../screens/BleedInform";
 import BleedInformLog from "../screens/BleedInformLog";
 import BleedInformRegisterView from "../screens/BleedInformRegisterView";
+import HematologistConsult from "../screens/HematologistConsult";
+import DentistConsult from "../screens/DentistConsult";
+import PhysioterapistConsult from "../screens/PhysioterapistConsult";
 
 const Stack = createStackNavigator();
 
 export default function AppRoutes() {
     return <NavigationContainer>
     <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="BleedInformRegisterView" component={BleedInformRegisterView} />
+        <Stack.Screen name="PhysioterapistConsult" component={PhysioterapistConsult} />
     </Stack.Navigator>
   </NavigationContainer>
 }
