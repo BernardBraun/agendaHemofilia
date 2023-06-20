@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 export default function AppRoutes() {
     return <NavigationContainer>
     <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="PhysioterapistConsult" component={PhysioterapistConsult} />
+        <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   </NavigationContainer>
 }

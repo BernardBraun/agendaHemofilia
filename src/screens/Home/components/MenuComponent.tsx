@@ -17,7 +17,7 @@ export default function MenuComponent() {
         <View style={styles.buttonContainerA}>
             <ButtonComponent labelButton="Localize seu Hemocentro" onpress={clearField} />
             <ButtonComponent labelButton="Atualize seu diário" onpress={loginApp} />
-            <ButtonComponent labelButton="Inclua / Atualize a peridiocidade da infusão" onpress={loginApp} />
+            <ButtonComponent labelButton="Atualize seus dados" onpress={loginApp} />
             <ButtonComponent labelButton="Inclua / Atualize se houve sangramento" onpress={loginApp} />
             <ButtonComponent labelButton="Inclua / Atualize consulta com o Hematologista" onpress={loginApp} />
             <ButtonComponent labelButton="Inclua / Atualize consulta com o Dentista" onpress={loginApp} />

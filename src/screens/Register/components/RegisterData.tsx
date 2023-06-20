@@ -84,13 +84,11 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: '1' },
+            { key: '2', value: '2' },
+            { key: '3', value: '3' },
+            { key: '4', value: '4' },
+            { key: '5', value: '5' }
         ]
 
         return (
@@ -101,7 +99,7 @@ export default function FieldComponent() {
                 search={false}
                 boxStyles={{ borderColor: "#EB0102" }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Defina quantas vezes você faz infusão"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
             />
@@ -152,6 +150,8 @@ export default function FieldComponent() {
             <TextInput inputMode="decimal" style={styles.textInputRegister}/>
             <Text style={styles.text}>Tipo da Hemofilia</Text>
             <FourthSelect />
+            <Text style={styles.text}>Quantidade de dias para infusão</Text>
+            <ThirdSelect />
             <Text style={styles.text}>Celular</Text>
             <TextInput inputMode="tel" style={styles.textInputRegister}/>
             <Text style={styles.text}>E-mail</Text>
