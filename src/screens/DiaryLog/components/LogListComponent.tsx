@@ -1,6 +1,7 @@
 import React, {JSXElementConstructor, useState} from "react"
 import {StyleSheet, View, Text} from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useNavigation } from '@react-navigation/native';
 import CheckboxComponent from "./CheckboxComponent"
 import registers from "../../../mocks/regiters"
 import ButtonComponent from "./ButtonComponent"
@@ -13,6 +14,7 @@ const clearField = () => {
 
 
 
+
 export default function LogListComponent() {
     const Boxes = registers.map(
         (a, i) => {
@@ -20,6 +22,7 @@ export default function LogListComponent() {
         }
     )
 
+    const returnPage = useNavigation();
     const registersUse = registers.map
 
     return <SafeAreaView >
@@ -28,7 +31,9 @@ export default function LogListComponent() {
             {/* <View>{Boxes}</View> */}
             <View style={styles.buttonContainer}>
                 <ButtonComponent labelButton="Ver Registro" onpress={clearField}/>
-                <ButtonComponent labelButton="Sair" onpress={clearField}/>
+                <ButtonComponent labelButton="Sair" onpress={() => {
+                    returnPage.navigate('DiaryUpdate')
+                }}/>
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
         </View>

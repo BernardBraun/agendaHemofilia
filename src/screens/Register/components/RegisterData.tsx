@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
@@ -7,19 +7,44 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import SelectListComponent from '../../DiaryLog/components/SelectListComponent';
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
+import { useNavigation } from "@react-navigation/native";
 
-const screenDimensions  = Dimensions.get('screen');
+const screenDimensions = Dimensions.get('screen');
+
+
 
 export default function FieldComponent() {
 
+
+    const [name, setName] = useState('');
+    const [birthdate, setBirthdate] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    const [hemophiliaType, setHemophiliaType] = useState('');
+    const [infusion, setInfusion] = useState('');
+    const [cellphoneNumber, setCellphoneNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
+    const [district, setDistrict] = useState('');
+    const [city, setCity] = useState('');
+    const [provincy, setProvincy] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [motherName, setMotherName] = useState('');
+    const [fatherName, setFatherName] = useState('');
+    const [bloodCenter, setBloodCenter] = useState('');
+    const [bloodCenterPhone, setBloodCenterPhone] = useState('');
+
+    const userRegister = () => {
+
+    }
 
     const clearField = () => {
         alert('Campo limpo');
     }
 
-    const loginApp = () => {
-        alert('Logando na aplicação');
-    }
+    const returnScreen = useNavigation();
+
 
     const FirstSelect = () => {
 
@@ -133,54 +158,113 @@ export default function FieldComponent() {
 
             />
         )
-    }    
+    }
 
-    return <KeyboardAvoidingView 
+    return <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
         keyboardVerticalOffset={20}>
-            <ScrollView>
+        <ScrollView>
             <Text style={styles.text}>Nome completo</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput
+                style={styles.textInputRegister}
+                value={name}
+                onChangeText={text => setName(text)} />
             <Text style={styles.text}>Data de Nascimento</Text>
-            <TextInput inputMode="decimal" style={styles.textInputRegister } />
+            <TextInput 
+                inputMode="decimal" 
+                style={styles.textInputRegister}
+                value={birthdate}
+                onChangeText={text => setBirthdate(text)} />
             <Text style={styles.text}>Altura</Text>
-            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
+            <TextInput 
+                inputMode="decimal"
+                style={styles.textInputRegister}
+                value={height}
+                onChangeText={text => setHeight(text)} />
             <Text style={styles.text}>Peso</Text>
-            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
+            <TextInput 
+                inputMode="decimal" 
+                style={styles.textInputRegister}
+                value={weight}
+                onChangeText={text => setWeight(text)} />
             <Text style={styles.text}>Tipo da Hemofilia</Text>
             <FourthSelect />
             <Text style={styles.text}>Quantidade de dias para infusão</Text>
             <ThirdSelect />
             <Text style={styles.text}>Celular</Text>
-            <TextInput inputMode="tel" style={styles.textInputRegister}/>
+            <TextInput 
+                inputMode="tel"
+                style={styles.textInputRegister}
+                value={cellphoneNumber}
+                onChangeText={text => setCellphoneNumber(text)} />
             <Text style={styles.text}>E-mail</Text>
-            <TextInput inputMode="email" style={styles.textInputRegister}/>
+            <TextInput 
+                inputMode="email" 
+                style={styles.textInputRegister}
+                value={email}
+                onChangeText={text => setEmail(text)} />
+            <Text style={styles.text}>Senha para acesso ao app</Text>
+            <TextInput 
+                inputMode="text" 
+                secureTextEntry={true} 
+                style={styles.textInputRegister}
+                value={password}
+                onChangeText={text => setPassword(text)} />
             <Text style={styles.text}>Endereço</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={address}
+                onChangeText={text => setAddress(text)} />
             <Text style={styles.text}>Bairro</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={district}
+                onChangeText={text => setDistrict(text)} />
             <Text style={styles.text}>Cidade</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={city}
+                onChangeText={text => setCity(text)} />
             <Text style={styles.text}>Estado</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={provincy}
+                onChangeText={text => setProvincy(text)} />
             <Text style={styles.text}>CEP</Text>
-            <TextInput inputMode="numeric" style={styles.textInputRegister}/>
+            <TextInput 
+                inputMode="numeric" 
+                style={styles.textInputRegister}
+                value={postalCode}
+                onChangeText={text => setPostalCode(text)} />
             <Text style={styles.text}>Nome da Mãe</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={motherName}
+                onChangeText={text => setMotherName(text)} />
             <Text style={styles.text}>Nome do Pai</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={fatherName}
+                onChangeText={text => setFatherName(text)} />
             <Text style={styles.text}>Hemocentro</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput 
+                style={styles.textInputRegister}
+                value={bloodCenter}
+                onChangeText={text => setBloodCenter(text)} />
             <Text style={styles.text}>Telefone Hemocentro</Text>
-            <TextInput inputMode="tel" style={styles.textInputRegister}/>
+            <TextInput 
+                inputMode="tel"
+                style={styles.textInputRegister}
+                value={bloodCenterPhone}
+                onChangeText={text => setBloodCenterPhone(text)} />
             <View style={styles.buttonContainer}>
-                <ButtonComponent labelButton="Sair" onpress={loginApp} />
-                <ButtonComponent labelButton="Cadastrar" onpress={loginApp} />
+                <ButtonComponent labelButton="Sair" onpress={() => { returnScreen.navigate('Login') }} />
+                <ButtonComponent labelButton="Cadastrar" onpress={clearField} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
-            </ScrollView>
-        </KeyboardAvoidingView>
+        </ScrollView>
+    </KeyboardAvoidingView>
 }
 
 const styles = StyleSheet.create({
@@ -210,7 +294,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingLeft: 10,
-        paddingTop:0,
+        paddingTop: 0,
         paddingBottom: -100
     },
     buttonContainer: {

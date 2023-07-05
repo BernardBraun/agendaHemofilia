@@ -1,22 +1,25 @@
 import React from "react"
 import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from "react-native-safe-area-context"
 
 import { SelectList } from 'react-native-dropdown-select-list';
 
 import SelectListComponent from '../../DiaryLog/components/SelectListComponent';
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
-import DateTimePicker from "../../commons/DateTimePicker";
+import { useNavigation } from "@react-navigation/native";
 
 const screenDimensions  = Dimensions.get('screen');
 
 export default function FieldComponent() {
 
 
-    const returnHome = useNavigation();
+    const clearField = () => {
+        alert('Campo limpo');
+    }
 
-    const diaryUpdaeLog = useNavigation();
+    const returnScreen = useNavigation();
+
 
     const FirstSelect = () => {
 
@@ -81,13 +84,11 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: '1' },
+            { key: '2', value: '2' },
+            { key: '3', value: '3' },
+            { key: '4', value: '4' },
+            { key: '5', value: '5' }
         ]
 
         return (
@@ -98,7 +99,7 @@ export default function FieldComponent() {
                 search={false}
                 boxStyles={{ borderColor: "#EB0102" }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Defina quantas vezes você faz infusão"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
             />
@@ -110,13 +111,12 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: 'A / Leve' },
+            { key: '2', value: 'A / Moderada' },
+            { key: '3', value: 'A / Grave' },
+            { key: '4', value: 'B / Leve' },
+            { key: '5', value: 'B / Moderada' },
+            { key: '6', value: 'B / Grave' }
         ]
 
         return (
@@ -125,9 +125,9 @@ export default function FieldComponent() {
                 data={data}
                 save="value"
                 search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
+                boxStyles={{ borderColor: "#EB0102", width: "100%", height: 45 }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Selecione o tipo de sua Hemofilia"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
 
@@ -140,33 +140,43 @@ export default function FieldComponent() {
         style={styles.container}
         keyboardVerticalOffset={20}>
             <ScrollView>
-            <Text style={styles.text}>Data / Hora</Text>
-            <DateTimePicker />
-            <Text style={styles.text}>Unidade</Text>
-            <FirstSelect />
-            <Text style={styles.text}>Motivo da Infusão</Text>
-            <SecondSelect />
-            <Text style={styles.text}>Tipo / Local do Sangramento</Text>
-            <ThirdSelect />
-            <Text style={styles.text}>Tratamento</Text>
+            <Text style={styles.text}>Nome completo</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Data de Nascimento</Text>
+            <TextInput inputMode="decimal" style={styles.textInputRegister } />
+            <Text style={styles.text}>Altura</Text>
+            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
+            <Text style={styles.text}>Peso</Text>
+            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
+            <Text style={styles.text}>Tipo da Hemofilia</Text>
             <FourthSelect />
-            <Text style={styles.text}>Observações</Text>
-            <TextInput 
-                style={styles.textInput}
-                multiline={true}
-                numberOfLines={6}
-                keyboardType="default"
-            />
+            <Text style={styles.text}>Quantidade de dias para infusão</Text>
+            <ThirdSelect />
+            <Text style={styles.text}>Celular</Text>
+            <TextInput inputMode="tel" style={styles.textInputRegister}/>
+            <Text style={styles.text}>E-mail</Text>
+            <TextInput inputMode="email" style={styles.textInputRegister}/>
+            <Text style={styles.text}>Endereço</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Bairro</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Cidade</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Estado</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>CEP</Text>
+            <TextInput inputMode="numeric" style={styles.textInputRegister}/>
+            <Text style={styles.text}>Nome da Mãe</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Nome do Pai</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Hemocentro</Text>
+            <TextInput style={styles.textInputRegister}/>
+            <Text style={styles.text}>Telefone Hemocentro</Text>
+            <TextInput inputMode="tel" style={styles.textInputRegister}/>
             <View style={styles.buttonContainer}>
-                <ButtonComponent labelButton="Ver Registros" onpress={() => {
-                    diaryUpdaeLog.navigate('DiaryLog')
-                }} />
-                <ButtonComponent labelButton="Voltar" onpress={() => {
-                    returnHome.navigate('Home')
-                }} />
-                <ButtonComponent labelButton="Salvar" onpress={() => {
-
-                }} />
+                <ButtonComponent labelButton="Sair" onpress={() => {returnScreen.navigate('Home')}} />
+                <ButtonComponent labelButton="Cadastrar" onpress={clearField} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
             </ScrollView>
@@ -175,7 +185,7 @@ export default function FieldComponent() {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        paddingHorizontal: 10
     },
     text: {
         color: "#EB0102",
@@ -185,20 +195,33 @@ const styles = StyleSheet.create({
         borderColor: "#EB0102",
         borderWidth: 1,
         borderRadius: 6,
-        width: screenDimensions.width,
+        width: "100%",
         height: 160,
         color: "#EB0102",
         textAlignVertical: "top",
+    },
+    textInputRegister: {
+        borderColor: "#EB0102",
+        borderWidth: 1,
+        borderRadius: 6,
+        width: "100%",
+        height: 30,
+        color: "#EB0102",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingLeft: 10,
+        paddingTop:0,
+        paddingBottom: -100
     },
     buttonContainer: {
         paddingTop: 15,
         paddingBottom: 6,
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-evenly"
     },
     bottomText: {
         paddingTop: 30,
-        paddingLeft: 10,
+        paddingLeft: 5,
         color: "#000000",
         fontSize: 6
     }

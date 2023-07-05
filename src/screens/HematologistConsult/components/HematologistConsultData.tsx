@@ -3,17 +3,17 @@ import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-
 import { SafeAreaView } from "react-native-safe-area-context"
 import { SelectList } from 'react-native-dropdown-select-list';
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import ButtonComponent from "./ButtonComponent";
 import SwitchComponent from "./SwitchComponent";
+import DateTimePicker from "../../commons/DateTimePicker";
 
 const screenDimensions  = Dimensions.get('screen');
 
 export default function HematologistConsultData() {
 
 
-    const clearField = () => {
-        alert('Campo limpo');
-    }
+    const returnScreen = useNavigation();
 
     const loginApp = () => {
         alert('Logando na aplicação');
@@ -52,11 +52,11 @@ export default function HematologistConsultData() {
         keyboardVerticalOffset={20}>
             <ScrollView>
             <Text style={styles.text}>Data / Hora</Text>
-            <TextInput style={styles.textInput}/>
+            <DateTimePicker />
             <Text style={styles.text}>Unidade</Text>
             <FirstSelect />
             <Text style={styles.text}>Médico Hematologista Responsável</Text>
-            <FirstSelect />
+            <TextInput style={styles.textInput} />
             <Text style={styles.text}>Observações</Text>
             <TextInput 
                 style={styles.textInputObs}
@@ -70,8 +70,8 @@ export default function HematologistConsultData() {
             </View>
 
             <View style={styles.buttonContainer}>
-                <ButtonComponent labelButton="Ver Calendário" onpress={clearField} />
-                <ButtonComponent labelButton="Voltar" onpress={loginApp} />
+                <ButtonComponent labelButton="Ver Calendário" onpress={loginApp} />
+                <ButtonComponent labelButton="Voltar" onpress={() => {returnScreen.navigate('Home')}} />
                 <ButtonComponent labelButton="Salvar" onpress={loginApp} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>

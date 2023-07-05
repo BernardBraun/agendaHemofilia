@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ButtonComponent from './ButtonComponent'
+import { useNavigation } from '@react-navigation/native';
 
 export default function DiaryRegisterViewComponent() {
-    const clearField = () => {
-        alert('Campo limpo');
-    }
+    const returnScreen = useNavigation();
 
   return(
     <View style={styles.container}>
@@ -35,7 +34,9 @@ export default function DiaryRegisterViewComponent() {
             <Text style={styles.info}>Aplicação feita pelos pais sob supervisão da enfermeira responsável.</Text>
         </View>
         <View style={styles.buttonContainer}>
-            <ButtonComponent labelButton="Voltar" onpress={clearField}/>
+            <ButtonComponent labelButton="Voltar" onpress={() => {
+                returnScreen.navigate('DiaryLog');
+            }}/>
         </View>
         <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
       </View>

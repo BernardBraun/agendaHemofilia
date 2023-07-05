@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Alert } from 
 
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
+import { useNavigation } from "@react-navigation/native";
 
 const screenDimensions  = Dimensions.get('screen');
 
@@ -11,6 +12,8 @@ export default function BleedInformRegisterViewData() {
     const clearField = () => {
         Alert.alert('Teste', 'Hello World');
     }
+
+    const returnScreen = useNavigation();
 
   return(
     <View style={styles.container}>
@@ -32,7 +35,9 @@ export default function BleedInformRegisterViewData() {
             <Text style={styles.info}>Em observação após infusão e gelo para ver se o sangramento para.</Text>
         </View>
         <View style={styles.buttonContainer}>
-            <ButtonComponent labelButton="Voltar" onpress={clearField}/>
+            <ButtonComponent labelButton="Voltar" onpress={() => {
+                returnScreen.navigate('BleedInformLog')
+            }}/>
         </View>
         <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
       </View>

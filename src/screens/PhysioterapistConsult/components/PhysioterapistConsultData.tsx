@@ -1,15 +1,18 @@
-import React from "react"
-import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+import React, { useState } from "react"
+import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Pressable, Platform } from "react-native"
 import { SelectList } from 'react-native-dropdown-select-list';
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
 import SwitchComponent from "./SwitchComponent";
+import { useNavigation } from "@react-navigation/native";
+import DateTimePicker from "../../commons/DateTimePicker";
 
-const screenDimensions  = Dimensions.get('screen');
+const screenDimensions = Dimensions.get('screen');
 
 export default function PhysioterapistConsultData() {
 
+
+    const returnScreen = useNavigation();
 
     const clearField = () => {
         alert('Campo limpo');
@@ -46,19 +49,53 @@ export default function PhysioterapistConsultData() {
         )
     }
 
-    return <KeyboardAvoidingView 
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
+    const [dateConsult, setDateConsult] = useState('');
+    const [date, setDate] = useState(new Date());
+    const [showPicker, setShowPicker] = useState(false);
+    const formatDate = (rawDate) => {
+        let date = new Date(rawDate)
+
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+
+        return `${day} / ${month} / ${year} - ${hour} : ${minute}}`;
+    }
+
+    const toggleDatePicker = () => {
+        setShowPicker(!showPicker);
+    }
+
+    const onchange = ({ type }, selectedDate) => {
+        if (type === "set") {
+            const currentDate = selectedDate;
+            setDate(currentDate)
+
+            if (Platform.OS === "android") {
+                toggleDatePicker();
+                setDateConsult(currentDate.toDateString())
+            }
+        } else {
+            toggleDatePicker();
+        }
+
+    }
+
+    return <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
         keyboardVerticalOffset={20}>
-            <ScrollView>
+        <ScrollView>
             <Text style={styles.text}>Data / Hora</Text>
-            <TextInput style={styles.textInput}/>
+            <DateTimePicker />
             <Text style={styles.text}>Unidade</Text>
             <FirstSelect />
-            <Text style={styles.text}>Médico Hematologista Responsável</Text>
-            <FirstSelect />
+            <Text style={styles.text}>Fisioterapeuta Responsável</Text>
+            <TextInput style={styles.textInput}/>
             <Text style={styles.text}>Observações</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInputObs}
                 multiline={true}
                 numberOfLines={6}
@@ -71,12 +108,12 @@ export default function PhysioterapistConsultData() {
 
             <View style={styles.buttonContainer}>
                 <ButtonComponent labelButton="Ver Calendário" onpress={clearField} />
-                <ButtonComponent labelButton="Voltar" onpress={loginApp} />
+                <ButtonComponent labelButton="Voltar" onpress={() => { returnScreen.navigate('Home') }} />
                 <ButtonComponent labelButton="Salvar" onpress={loginApp} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
-            </ScrollView>
-        </KeyboardAvoidingView>
+        </ScrollView>
+    </KeyboardAvoidingView>
 }
 
 const styles = StyleSheet.create({
@@ -86,6 +123,12 @@ const styles = StyleSheet.create({
     text: {
         color: "#EB0102",
         fontWeight: "bold"
+    },
+    dateComponent: {
+        width: "100%",
+        borderRadius: 6,
+        borderColor: "#EB0102",
+        borderWidth: 1
     },
     textInputObs: {
         borderColor: "#EB0102",
@@ -112,7 +155,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start"
     },
     buttonContainer: {
-        marginTop:30,
+        marginTop: 30,
         paddingTop: 15,
         flexDirection: "row",
         justifyContent: "space-between"

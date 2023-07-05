@@ -8,7 +8,7 @@ export default function TopComponent() {
     return <SafeAreaView style={styles.container}>
         <View style={styles.headerUpdate}>
             <Image source={logo} style={styles.logo}/>
-            <Text style={styles.dailyUpdate}>Consulta com {"\n"}Hematologista</Text>
+            <Text style={styles.dailyUpdate}>Cadastro de Usuário</Text>
         </View>
     </SafeAreaView>
 }
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     dailyUpdate: {
-        marginTop: 35,
+        marginTop: 45,
         color: "#EB0102",
-        marginLeft: 25,
+        marginLeft: 16,
         fontWeight: "bold",
-        fontSize: 28,
+        fontSize: 26,
         justifyContent: "center",
         alignItems: "center"
     }

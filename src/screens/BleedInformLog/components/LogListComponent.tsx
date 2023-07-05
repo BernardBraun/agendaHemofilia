@@ -5,6 +5,7 @@ import CheckboxComponent from "./CheckboxComponent"
 import registers from "../../../mocks/regiters"
 import ButtonComponent from "./ButtonComponent"
 import CheckBox from "./CheckBox/checkBox"
+import { useNavigation } from "@react-navigation/native"
 
 const clearField = () => {
     alert('Campo limpo');
@@ -20,6 +21,8 @@ export default function LogListComponent() {
         }
     )
 
+    const returnScreen = useNavigation();
+
     const registersUse = registers.map
 
     return <SafeAreaView >
@@ -28,7 +31,9 @@ export default function LogListComponent() {
             {/* <View>{Boxes}</View> */}
             <View style={styles.buttonContainer}>
                 <ButtonComponent labelButton="Ver Registro" onpress={clearField}/>
-                <ButtonComponent labelButton="Sair" onpress={clearField}/>
+                <ButtonComponent labelButton="Sair" onpress={() => {
+                    returnScreen.navigate('BleedInformScreen')
+                }}/>
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
         </View>
