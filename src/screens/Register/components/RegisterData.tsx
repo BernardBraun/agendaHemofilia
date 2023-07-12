@@ -16,8 +16,36 @@ const screenDimensions = Dimensions.get('screen');
 export default function FieldComponent() {
 
 
-    const [name, setName] = useState('');
-    const [birthdate, setBirthdate] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        birthdate: '',
+        height: '',
+        weight: '',
+        hemophiliaType: '',
+        infusion: '',
+        cellphoneNumber: '',
+        email: '',
+        password: '',
+        address: '',
+        district: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        motherName: '',
+        fatherName: '',
+        bloodCenter: '',
+        bloodCenterPhone: '',
+      });
+
+
+    const handleNameChange = (value) => {
+        setFormData({ ...formData, name: value});
+    }
+
+    const handleBirthdateChange = (value) => {
+        setFormData({ ...formData, birthdate: value})
+    }
+
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [hemophiliaType, setHemophiliaType] = useState('');
@@ -136,12 +164,12 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'A / Leve' },
-            { key: '2', value: 'A / Moderada' },
-            { key: '3', value: 'A / Grave' },
-            { key: '4', value: 'B / Leve' },
-            { key: '5', value: 'B / Moderada' },
-            { key: '6', value: 'B / Grave' }
+            { key: 'A_LEVE', value: 'A / Leve' },
+            { key: 'A_MODERADA', value: 'A / Moderada' },
+            { key: 'A_GRAVE', value: 'A / Grave' },
+            { key: 'B_LEVE', value: 'B / Leve' },
+            { key: 'B_MODERADA', value: 'B / Moderada' },
+            { key: 'B_GRAVE', value: 'B / Grave' }
         ]
 
         return (
@@ -189,6 +217,8 @@ export default function FieldComponent() {
                 value={weight}
                 onChangeText={text => setWeight(text)} />
             <Text style={styles.text}>Tipo da Hemofilia</Text>
+            <FourthSelect />
+            <Text style={styles.text}>Possui Inibidor?</Text>
             <FourthSelect />
             <Text style={styles.text}>Quantidade de dias para infusão</Text>
             <ThirdSelect />

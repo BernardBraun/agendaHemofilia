@@ -14,8 +14,15 @@ export default function LoginData() {
     const loginNavigation = useNavigation();
 
     const loginApp = () => {
-        alert('Logando na aplicação');
-    }
+        fetch('https://api.adviceslip.com/advice')
+          .then(response => response.json())
+          .then(data => {
+            Alert.alert("Alert",data.slip.advice);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
 
     const createAccount = useNavigation();
 
@@ -25,7 +32,9 @@ export default function LoginData() {
         <Text style={styles.password}>Senha:</Text>
         <TextInput secureTextEntry={true} blurOnSubmit={true} textContentType='password' style={styles.field}/>
         <View style={styles.buttonContainerA}>
-            <ButtonComponent labelButton="Limpar" onpress={clearField} />
+            <ButtonComponent labelButton="Limpar" onpress={() => {
+                loginApp();
+            }} />
             <ButtonComponent labelButton="Entrar" onpress={() => {
                 loginNavigation.navigate('Home');
             }

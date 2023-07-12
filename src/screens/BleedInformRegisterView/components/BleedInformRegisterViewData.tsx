@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     bottomText: {
-        paddingTop: 30,
+        paddingTop: 20,
         paddingLeft: 10,
         color: "#000000",
         fontSize: 6

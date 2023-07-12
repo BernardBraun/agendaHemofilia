@@ -16,6 +16,7 @@ import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 
 export default function DateTimePicker() {
     const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
+    const endDate = "01/01/1999";
     const startDate = getFormatedDate(new Date(getToday()),"DD/MM/YYYY - h:m");
     const [selectedStartDate, setSelectedStartDate] = useState("");
     const [startedDate, setStartedDate] = useState(getToday());
@@ -48,7 +49,12 @@ export default function DateTimePicker() {
                     <View style={styles.modalView}>
                         <DatePicker
                             mode="datepicker"
-                            minimumDate={startDate}
+                            minimumDate={"1999-01-01"}
+                            maximumDate={"2050-12-31"}
+                            minuteInterval={15}
+                            selectorStartingYear={1999}
+                            selectorEndingYear={2050}
+                            current={getToday()}
                             selected={startedDate}
                             onDateChange={handleChangeStartDate}
                             onSelectedChange={(date) => setSelectedStartDate(date)}
