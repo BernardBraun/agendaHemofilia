@@ -1,140 +1,171 @@
-import React, { useState } from "react"
-import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+import React, { useState, useEffect } from "react"
+import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Platform } from "react-native"
 
 import { SelectList } from 'react-native-dropdown-select-list';
 
-import SelectListComponent from '../../DiaryLog/components/SelectListComponent';
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
-
-const screenDimensions = Dimensions.get('screen');
+import SelectStates from "../../commons/SelectStates";
+import SelectCities from "../../commons/SelectCities";
 
 
 
 export default function FieldComponent() {
 
-
+    const [selectedState, setSelectedState] = useState(null)
+    const [selectedCity, setSelectedCity] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         birthdate: '',
         height: '',
         weight: '',
         hemophiliaType: '',
+        email: '',
+        inhibitor: '',
         infusion: '',
         cellphoneNumber: '',
-        email: '',
-        password: '',
-        address: '',
-        district: '',
-        city: '',
-        state: '',
-        postalCode: '',
+        login: {
+            login: '',
+            password: ''
+        },
+        address: {
+            streetName: '',
+            district: '',
+            cityId: 0,
+            postalCode: ''
+        },
         motherName: '',
         fatherName: '',
-        bloodCenter: '',
-        bloodCenterPhone: '',
-      });
+        hemocenterId: ''
+    });
 
-
+    //sensitive data info
     const handleNameChange = (value) => {
-        setFormData({ ...formData, name: value});
-    }
-
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            name: value,
+        }));
+    };
     const handleBirthdateChange = (value) => {
-        setFormData({ ...formData, birthdate: value})
-    }
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            birthdate: value,
+        }));
+    };
+    const handleHeightChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            height: value,
+        }));
+    };
+    const handleWeightChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            weight: value,
+        }));
+    };
+    const handleCellphoneNumberChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            cellphoneNumber: value,
+        }));
+    };
+    const handleMotherNameChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            motherName: value,
+        }));
+    };
+    const handleFatherNameChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            fatherName: value,
+        }));
+    };
 
-    const [height, setHeight] = useState('');
-    const [weight, setWeight] = useState('');
-    const [hemophiliaType, setHemophiliaType] = useState('');
-    const [infusion, setInfusion] = useState('');
-    const [cellphoneNumber, setCellphoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [address, setAddress] = useState('');
-    const [district, setDistrict] = useState('');
-    const [city, setCity] = useState('');
-    const [provincy, setProvincy] = useState('');
-    const [postalCode, setPostalCode] = useState('');
-    const [motherName, setMotherName] = useState('');
-    const [fatherName, setFatherName] = useState('');
-    const [bloodCenter, setBloodCenter] = useState('');
-    const [bloodCenterPhone, setBloodCenterPhone] = useState('');
 
-    const userRegister = () => {
+    //login info
+    const handleEmailChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: {
+                ...prevFormData.login,
+                login: value,
+            },
+            email: value
+        }));
+    };
+    const handlePasswordChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: {
+                ...prevFormData.login,
+                password: value,
+            },
+        }));
+    };
 
-    }
+    //address info
+    const handleStreetNameChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            address: {
+                ...prevFormData.address,
+                streetName: value,
+            },
+        }));
+    };
+    const handleDistrictChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            address: {
+                ...prevFormData.address,
+                district: value,
+            },
+        }));
+    };
+    
+    const handleStateChange = (value) => {
+        setSelectedState(value);
+    };
 
-    const clearField = () => {
-        alert('Campo limpo');
-    }
+    const handleCityChange = (value) => {
+        setSelectedCity(value);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            address: {
+                ...prevFormData.address,
+                cityId: value,
+            },
+        }));
+    };
+
+
+    const handlePostalCodeChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            address: {
+                ...prevFormData.address,
+                postalCode: value,
+            },
+        }));
+    };
 
     const returnScreen = useNavigation();
 
-
-    const FirstSelect = () => {
-
-        const [selected, setSelected] = React.useState("");
-
-        const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
-        ]
-
-        return (
-            <SelectList
-                setSelected={(val) => setSelected(val)}
-                data={data}
-                save="value"
-                search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
-                dropdownStyles={{ borderColor: "#EB0102" }}
-                dropdownTextStyles={{ color: "#EB0102" }}
-            />
-        )
-    }
-
-    const SecondSelect = () => {
+    
+    const InfusionDays = () => {
 
         const [selected, setSelected] = React.useState("");
 
-        const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
-        ]
-
-        return (
-            <SelectList
-                setSelected={(val) => setSelected(val)}
-                data={data}
-                save="value"
-                search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
-                dropdownStyles={{ borderColor: "#EB0102" }}
-                dropdownTextStyles={{ color: "#EB0102" }}
-            />
-        )
-    }
-
-    const ThirdSelect = () => {
-
-        const [selected, setSelected] = React.useState("");
+        const handleSelectInfusionDays = (value) => {
+            setSelected(value);
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                hemophiliaType: value,
+            }));
+        };
 
         const data = [
             { key: '1', value: '1' },
@@ -146,7 +177,7 @@ export default function FieldComponent() {
 
         return (
             <SelectList
-                setSelected={(val) => setSelected(val)}
+                setSelected={handleSelectInfusionDays}
                 data={data}
                 save="value"
                 search={false}
@@ -159,9 +190,49 @@ export default function FieldComponent() {
         )
     }
 
-    const FourthSelect = () => {
+    const Inhibitor = () => {
 
         const [selected, setSelected] = React.useState("");
+
+        const handleSelectInhibitor = (value) => {
+            setSelected(value);
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                hemophiliaType: value,
+            }));
+        };
+
+        const data = [
+            { key: '1', value: 'Sim' },
+            { key: '2', value: 'Não' }
+        ]
+
+        return (
+            <SelectList
+                setSelected={handleSelectInhibitor}
+                data={data}
+                save="value"
+                search={false}
+                boxStyles={{ borderColor: "#EB0102" }}
+                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
+                placeholder="Possui inibidor?"
+                dropdownStyles={{ borderColor: "#EB0102" }}
+                dropdownTextStyles={{ color: "#EB0102" }}
+            />
+        )
+    }
+
+    const HemophiliaType = () => {
+
+        const [selected, setSelected] = React.useState("");
+
+        const handleSelectHemophiliaType = (value) => {
+            setSelected(value);
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                hemophiliaType: value,
+            }));
+        };
 
         const data = [
             { key: 'A_LEVE', value: 'A / Leve' },
@@ -174,7 +245,7 @@ export default function FieldComponent() {
 
         return (
             <SelectList
-                setSelected={(val) => setSelected(val)}
+                setSelected={handleSelectHemophiliaType}
                 data={data}
                 save="value"
                 search={false}
@@ -188,6 +259,8 @@ export default function FieldComponent() {
         )
     }
 
+    const json = JSON.stringify(formData);
+
     return <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
@@ -196,101 +269,95 @@ export default function FieldComponent() {
             <Text style={styles.text}>Nome completo</Text>
             <TextInput
                 style={styles.textInputRegister}
-                value={name}
-                onChangeText={text => setName(text)} />
+                value={formData.name}
+                onChangeText={(value) => handleNameChange(value)} />
             <Text style={styles.text}>Data de Nascimento</Text>
-            <TextInput 
-                inputMode="decimal" 
-                style={styles.textInputRegister}
-                value={birthdate}
-                onChangeText={text => setBirthdate(text)} />
-            <Text style={styles.text}>Altura</Text>
-            <TextInput 
+            <TextInput
                 inputMode="decimal"
                 style={styles.textInputRegister}
-                value={height}
-                onChangeText={text => setHeight(text)} />
+                value={formData.birthdate}
+                onChangeText={(value) => handleBirthdateChange(value)} />
+            <Text style={styles.text}>Altura</Text>
+            <TextInput
+                inputMode="decimal"
+                style={styles.textInputRegister}
+                value={formData.height}
+                onChangeText={(value) => handleHeightChange(value)} />
             <Text style={styles.text}>Peso</Text>
-            <TextInput 
-                inputMode="decimal" 
+            <TextInput
+                inputMode="decimal"
                 style={styles.textInputRegister}
-                value={weight}
-                onChangeText={text => setWeight(text)} />
+                value={formData.weight}
+                onChangeText={(value) => handleWeightChange(value)} />
             <Text style={styles.text}>Tipo da Hemofilia</Text>
-            <FourthSelect />
+            <HemophiliaType />
             <Text style={styles.text}>Possui Inibidor?</Text>
-            <FourthSelect />
+            <Inhibitor />
             <Text style={styles.text}>Quantidade de dias para infusão</Text>
-            <ThirdSelect />
+            <InfusionDays />
             <Text style={styles.text}>Celular</Text>
-            <TextInput 
+            <TextInput
                 inputMode="tel"
                 style={styles.textInputRegister}
-                value={cellphoneNumber}
-                onChangeText={text => setCellphoneNumber(text)} />
+                value={formData.cellphoneNumber}
+                onChangeText={(value) => handleCellphoneNumberChange(value)} />
             <Text style={styles.text}>E-mail</Text>
-            <TextInput 
-                inputMode="email" 
+            <TextInput
+                inputMode="email"
                 style={styles.textInputRegister}
-                value={email}
-                onChangeText={text => setEmail(text)} />
+                value={formData.login.login}
+                onChangeText={(value) => handleEmailChange(value)} />
             <Text style={styles.text}>Senha para acesso ao app</Text>
-            <TextInput 
-                inputMode="text" 
-                secureTextEntry={true} 
+            <TextInput
+                inputMode="text"
+                secureTextEntry={true}
                 style={styles.textInputRegister}
-                value={password}
-                onChangeText={text => setPassword(text)} />
+                value={formData.login.password}
+                onChangeText={(value) => handlePasswordChange(value)} />
             <Text style={styles.text}>Endereço</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInputRegister}
-                value={address}
-                onChangeText={text => setAddress(text)} />
+                value={formData.address.streetName}
+                onChangeText={(value) => handleStreetNameChange(value)} />
             <Text style={styles.text}>Bairro</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInputRegister}
-                value={district}
-                onChangeText={text => setDistrict(text)} />
-            <Text style={styles.text}>Cidade</Text>
-            <TextInput 
-                style={styles.textInputRegister}
-                value={city}
-                onChangeText={text => setCity(text)} />
+                value={formData.address.district}
+                onChangeText={(value) => handleDistrictChange(value)} />
             <Text style={styles.text}>Estado</Text>
-            <TextInput 
-                style={styles.textInputRegister}
-                value={provincy}
-                onChangeText={text => setProvincy(text)} />
+            <SelectStates onSelect={handleStateChange}/>
+            <Text style={styles.text}>Cidade</Text>
+            <SelectCities  selectedState={selectedState} onSelect={handleCityChange}/>
             <Text style={styles.text}>CEP</Text>
-            <TextInput 
-                inputMode="numeric" 
+            <TextInput
+                inputMode="numeric"
                 style={styles.textInputRegister}
-                value={postalCode}
-                onChangeText={text => setPostalCode(text)} />
+                value={formData.address.postalCode}
+                onChangeText={(value) => handlePostalCodeChange(value)} />
             <Text style={styles.text}>Nome da Mãe</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInputRegister}
-                value={motherName}
-                onChangeText={text => setMotherName(text)} />
+                value={formData.motherName}
+                onChangeText={(value) => handleMotherNameChange(value)} />
             <Text style={styles.text}>Nome do Pai</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInputRegister}
-                value={fatherName}
-                onChangeText={text => setFatherName(text)} />
+                value={formData.fatherName}
+                onChangeText={(value) => handleFatherNameChange(value)} />
             <Text style={styles.text}>Hemocentro</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInputRegister}
-                value={bloodCenter}
-                onChangeText={text => setBloodCenter(text)} />
+                value={formData.bloodCenter}
+                onChangeText={() => { }} />
             <Text style={styles.text}>Telefone Hemocentro</Text>
-            <TextInput 
+            <TextInput
                 inputMode="tel"
                 style={styles.textInputRegister}
-                value={bloodCenterPhone}
-                onChangeText={text => setBloodCenterPhone(text)} />
+                value={formData.bloodCenterPhone}
+                onChangeText={() => { }} />
             <View style={styles.buttonContainer}>
                 <ButtonComponent labelButton="Sair" onpress={() => { returnScreen.navigate('Login') }} />
-                <ButtonComponent labelButton="Cadastrar" onpress={clearField} />
+                <ButtonComponent labelButton="Cadastrar" onpress={() => { console.log(json) }} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
         </ScrollView>

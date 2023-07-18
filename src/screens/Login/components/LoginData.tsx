@@ -4,6 +4,7 @@ import {Text, TextInput, StyleSheet, SafeAreaView, View, Button, Alert, NativeEv
 
 import ButtonComponent from './ButtonComponent';
 import { useNavigation } from '@react-navigation/native';
+import api from '../../../services/api';
 
 export default function LoginData() {
 
@@ -14,14 +15,13 @@ export default function LoginData() {
     const loginNavigation = useNavigation();
 
     const loginApp = () => {
-        fetch('https://api.adviceslip.com/advice')
-          .then(response => response.json())
-          .then(data => {
-            Alert.alert("Alert",data.slip.advice);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        api.get('http://10.1.11.249:8082/api/state')
+            .then(response => {
+                const data = response.data;
+                console.log(data)
+            }).catch(error => {
+                console.error('DEU ERRO', error);
+            })
       }
 
     const createAccount = useNavigation();
