@@ -14,6 +14,7 @@ const SelectStates = ({ onSelect = () => {} }) => {
 
     const handleStateChange = (value) => {
         setSelectedState(value);
+        console.log(value)
         onSelect(value);
     };
 

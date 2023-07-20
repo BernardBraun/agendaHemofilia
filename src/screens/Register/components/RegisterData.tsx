@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Platform } from "react-native"
+import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Platform, Alert } from "react-native"
 
 import { SelectList } from 'react-native-dropdown-select-list';
 
@@ -8,6 +8,10 @@ import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 import SelectStates from "../../commons/SelectStates";
 import SelectCities from "../../commons/SelectCities";
+import SelectHemocenter from "../../commons/SelectHemocenter";
+import HemophiliaType from "../../commons/HemophiliaType";
+import Inhibitor from "../../commons/Inhibitor";
+import InfusionDays from "../../commons/InfusionDays";
 
 
 
@@ -16,15 +20,15 @@ export default function FieldComponent() {
     const [selectedState, setSelectedState] = useState(null)
     const [selectedCity, setSelectedCity] = useState(null);
     const [formData, setFormData] = useState({
-        name: '',
-        birthdate: '',
-        height: '',
-        weight: '',
-        hemophiliaType: '',
+        completeName: '',
+        birthDate: '',
+        height: 0,
+        wieght: 0,
+        hemofiliaType: '',
         email: '',
-        inhibitor: '',
-        infusion: '',
-        cellphoneNumber: '',
+        inhibitor: false,
+        infusionDays: '',
+        cellPhone: '',
         login: {
             login: '',
             password: ''
@@ -37,20 +41,24 @@ export default function FieldComponent() {
         },
         motherName: '',
         fatherName: '',
-        hemocenterId: ''
+        hemocenterId: 0
     });
+    const [formErrors, setFormErrors] = useState({});
+    const renderErrorMessage = (fieldName) => {
+        return formErrors[fieldName] ? <Text style={styles.errorMessage}>{formErrors[fieldName]}</Text> : null;
+      };
 
     //sensitive data info
     const handleNameChange = (value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            name: value,
+            completeName: value,
         }));
     };
     const handleBirthdateChange = (value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            birthdate: value,
+            birthDate: value,
         }));
     };
     const handleHeightChange = (value) => {
@@ -62,13 +70,13 @@ export default function FieldComponent() {
     const handleWeightChange = (value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            weight: value,
+            wieght: value,
         }));
     };
     const handleCellphoneNumberChange = (value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            cellphoneNumber: value,
+            cellPhone: value,
         }));
     };
     const handleMotherNameChange = (value) => {
@@ -83,6 +91,8 @@ export default function FieldComponent() {
             fatherName: value,
         }));
     };
+
+    
 
 
     //login info
@@ -125,7 +135,7 @@ export default function FieldComponent() {
             },
         }));
     };
-    
+
     const handleStateChange = (value) => {
         setSelectedState(value);
     };
@@ -152,114 +162,64 @@ export default function FieldComponent() {
         }));
     };
 
+    const handleHemocenterChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            hemocenterId: value,
+        }));
+    };
+
+    const handleHemophiliaTypeChange = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            hemofiliaType: value,
+        }));
+    };
+
+    const handleSelectInhibitor = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            inhibitor: value,
+        }));
+    };
+    
+    const handleSelectInfusionDays = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDays: value,
+        }));
+    };
+
     const returnScreen = useNavigation();
 
+
     
-    const InfusionDays = () => {
-
-        const [selected, setSelected] = React.useState("");
-
-        const handleSelectInfusionDays = (value) => {
-            setSelected(value);
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                hemophiliaType: value,
-            }));
-        };
-
-        const data = [
-            { key: '1', value: '1' },
-            { key: '2', value: '2' },
-            { key: '3', value: '3' },
-            { key: '4', value: '4' },
-            { key: '5', value: '5' }
-        ]
-
-        return (
-            <SelectList
-                setSelected={handleSelectInfusionDays}
-                data={data}
-                save="value"
-                search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Defina quantas vezes você faz infusão"
-                dropdownStyles={{ borderColor: "#EB0102" }}
-                dropdownTextStyles={{ color: "#EB0102" }}
-            />
-        )
-    }
-
-    const Inhibitor = () => {
-
-        const [selected, setSelected] = React.useState("");
-
-        const handleSelectInhibitor = (value) => {
-            setSelected(value);
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                hemophiliaType: value,
-            }));
-        };
-
-        const data = [
-            { key: '1', value: 'Sim' },
-            { key: '2', value: 'Não' }
-        ]
-
-        return (
-            <SelectList
-                setSelected={handleSelectInhibitor}
-                data={data}
-                save="value"
-                search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Possui inibidor?"
-                dropdownStyles={{ borderColor: "#EB0102" }}
-                dropdownTextStyles={{ color: "#EB0102" }}
-            />
-        )
-    }
-
-    const HemophiliaType = () => {
-
-        const [selected, setSelected] = React.useState("");
-
-        const handleSelectHemophiliaType = (value) => {
-            setSelected(value);
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                hemophiliaType: value,
-            }));
-        };
-
-        const data = [
-            { key: 'A_LEVE', value: 'A / Leve' },
-            { key: 'A_MODERADA', value: 'A / Moderada' },
-            { key: 'A_GRAVE', value: 'A / Grave' },
-            { key: 'B_LEVE', value: 'B / Leve' },
-            { key: 'B_MODERADA', value: 'B / Moderada' },
-            { key: 'B_GRAVE', value: 'B / Grave' }
-        ]
-
-        return (
-            <SelectList
-                setSelected={handleSelectHemophiliaType}
-                data={data}
-                save="value"
-                search={false}
-                boxStyles={{ borderColor: "#EB0102", width: "100%", height: 45 }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Selecione o tipo de sua Hemofilia"
-                dropdownStyles={{ borderColor: "#EB0102" }}
-                dropdownTextStyles={{ color: "#EB0102" }}
-
-            />
-        )
-    }
 
     const json = JSON.stringify(formData);
+
+    const handleRegister = () => {
+        const BASE_URL = "http://10.1.11.249:8082/api";
+        const url = `${BASE_URL}/person`;
+    
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Resposta da API:", data);
+            Alert.alert("Sucesso!","Seu cadastro foi realizado com sucesso.")
+
+          })
+          .catch((error) => {
+            console.error("Erro ao enviar o formulário:", error);
+            Alert.alert("Erro!","Tente novamente mais tarde.")
+          });
+      };
+      
 
     return <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -271,42 +231,50 @@ export default function FieldComponent() {
                 style={styles.textInputRegister}
                 value={formData.name}
                 onChangeText={(value) => handleNameChange(value)} />
+                {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Data de Nascimento</Text>
             <TextInput
-                inputMode="decimal"
                 style={styles.textInputRegister}
                 value={formData.birthdate}
                 onChangeText={(value) => handleBirthdateChange(value)} />
+                {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Altura</Text>
             <TextInput
                 inputMode="decimal"
                 style={styles.textInputRegister}
                 value={formData.height}
                 onChangeText={(value) => handleHeightChange(value)} />
+                {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Peso</Text>
             <TextInput
                 inputMode="decimal"
                 style={styles.textInputRegister}
                 value={formData.weight}
                 onChangeText={(value) => handleWeightChange(value)} />
+                {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Tipo da Hemofilia</Text>
-            <HemophiliaType />
+            <HemophiliaType onSelect={handleHemophiliaTypeChange}/>
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Possui Inibidor?</Text>
-            <Inhibitor />
+            <Inhibitor onSelect={handleSelectInhibitor}/>
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Quantidade de dias para infusão</Text>
-            <InfusionDays />
+            <InfusionDays onSelect={handleSelectInfusionDays}/>
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Celular</Text>
             <TextInput
                 inputMode="tel"
                 style={styles.textInputRegister}
                 value={formData.cellphoneNumber}
                 onChangeText={(value) => handleCellphoneNumberChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>E-mail</Text>
             <TextInput
                 inputMode="email"
                 style={styles.textInputRegister}
                 value={formData.login.login}
                 onChangeText={(value) => handleEmailChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Senha para acesso ao app</Text>
             <TextInput
                 inputMode="text"
@@ -314,50 +282,53 @@ export default function FieldComponent() {
                 style={styles.textInputRegister}
                 value={formData.login.password}
                 onChangeText={(value) => handlePasswordChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Endereço</Text>
             <TextInput
                 style={styles.textInputRegister}
                 value={formData.address.streetName}
                 onChangeText={(value) => handleStreetNameChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Bairro</Text>
             <TextInput
                 style={styles.textInputRegister}
                 value={formData.address.district}
                 onChangeText={(value) => handleDistrictChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Estado</Text>
-            <SelectStates onSelect={handleStateChange}/>
+            <SelectStates onSelect={handleStateChange} />
+            {/* {renderErrorMessage("state")} */}
             <Text style={styles.text}>Cidade</Text>
-            <SelectCities  selectedState={selectedState} onSelect={handleCityChange}/>
+            <SelectCities selectedState={selectedState} onSelect={handleCityChange} />
+            {/* {renderErrorMessage("city")} */}
             <Text style={styles.text}>CEP</Text>
             <TextInput
                 inputMode="numeric"
                 style={styles.textInputRegister}
                 value={formData.address.postalCode}
                 onChangeText={(value) => handlePostalCodeChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Nome da Mãe</Text>
             <TextInput
                 style={styles.textInputRegister}
                 value={formData.motherName}
                 onChangeText={(value) => handleMotherNameChange(value)} />
+            {/* {renderErrorMessage("name")} */}
             <Text style={styles.text}>Nome do Pai</Text>
             <TextInput
                 style={styles.textInputRegister}
                 value={formData.fatherName}
                 onChangeText={(value) => handleFatherNameChange(value)} />
             <Text style={styles.text}>Hemocentro</Text>
-            <TextInput
-                style={styles.textInputRegister}
-                value={formData.bloodCenter}
-                onChangeText={() => { }} />
-            <Text style={styles.text}>Telefone Hemocentro</Text>
-            <TextInput
-                inputMode="tel"
-                style={styles.textInputRegister}
-                value={formData.bloodCenterPhone}
-                onChangeText={() => { }} />
+            {/* {renderErrorMessage("name")} */}
+            <SelectHemocenter onSelect={handleHemocenterChange}/>
             <View style={styles.buttonContainer}>
                 <ButtonComponent labelButton="Sair" onpress={() => { returnScreen.navigate('Login') }} />
-                <ButtonComponent labelButton="Cadastrar" onpress={() => { console.log(json) }} />
+                <ButtonComponent labelButton="Cadastrar" onpress={() => {
+                    console.log(json)
+                    handleRegister()
+                    
+                    }} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
         </ScrollView>
