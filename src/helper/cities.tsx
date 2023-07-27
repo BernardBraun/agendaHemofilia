@@ -1,7 +1,7 @@
-const BASE_URL = 'http://10.1.11.249:8082/api';
+import {URL_CITIES} from './baseUrl'
 
 export const fetchCitiesForStates = (stateId) => {
-    const url: string = `${BASE_URL}` + "/cities/" + `${stateId}`
+    const url: string = `${URL_CITIES}` + "/" + `${stateId}`
     console.log(url)
     return fetch(url).then(response => response.json())
 }
