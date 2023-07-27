@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-around"
     },
     bottomText: {
-        paddingTop: 50,
+        paddingTop: 30,
         paddingLeft: 10,
         color: "#000000",
         fontSize: 6

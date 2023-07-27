@@ -1,43 +1,129 @@
-import React from 'react';
-
-import {Text, TextInput, StyleSheet, SafeAreaView, View, Button, Alert, NativeEventEmitter, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput, StyleSheet, SafeAreaView, View, Alert, } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ButtonComponent from './ButtonComponent';
-import { useNavigation } from '@react-navigation/native';
+import { loginApp } from '../../../helper/authUtils';
 
 export default function LoginData() {
 
+    const [formData, setFormData] = useState({
+        login: '',
+        password: ''
+    })
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    const handleLogin = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: value
+        }))
+
+    }
+
+    const handlePassword = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            password: value
+        }))
+    }
+
     const clearField = () => {
-        alert('Campo limpo');
+        setFormData({
+            login: '',
+            password: ''
+        });
+        Alert.alert('Atenção', 'Campos limpos');
     }
 
-    const loginNavigation = useNavigation();
+    async function loginApp(formData) {
 
-    const loginApp = () => {
-        alert('Logando na aplicação');
+
+        const BASE_URL = "http://10.1.11.249:8082/auth";
+        const url = `${BASE_URL}/login`;
+
+        return fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição. Status code: ' + response.status);
+                }
+                return response.json()
+            })
+            .then(async (data) => {
+                try {
+                    await AsyncStorage.setItem('token', data.token);
+                    await AsyncStorage.setItem('dataAccess', new Date().toString());
+                    await AsyncStorage.setItem('userEmail', formData.login);
+                } catch (error) {
+                    Alert.alert("Erro", "Favor tente novamente mais tarde.")
+                }
+
+                return data;
+            })
+
     }
 
+    const handleLoginButtonPress = () => {
+        setIsLoading(true);
+
+        loginApp(formData)
+            .then((data) => {
+                setIsLoading(false);
+                loginAccount.navigate('Home');
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                Alert.alert('Erro no login', 'Verifique suas credenciais.');
+            });
+    };
+
+
+
+
+    const loginAccount = useNavigation();
     const createAccount = useNavigation();
 
     return <SafeAreaView style={styles.view}>
         <Text style={styles.login}>Login:</Text>
-        <TextInput inputMode='email' blurOnSubmit={true} keyboardType='email-address' style={styles.field}/>
+        <TextInput
+            inputMode='email'
+            blurOnSubmit={true}
+            keyboardType='email-address'
+            style={styles.field}
+            onChangeText={(value) => handleLogin(value)}
+        />
         <Text style={styles.password}>Senha:</Text>
-        <TextInput secureTextEntry={true} blurOnSubmit={true} textContentType='password' style={styles.field}/>
+        <TextInput
+            secureTextEntry={true}
+            blurOnSubmit={true}
+            textContentType='password'
+            style={styles.field}
+            onChangeText={(value) => handlePassword(value)}
+        />
         <View style={styles.buttonContainerA}>
-            <ButtonComponent labelButton="Limpar" onpress={clearField} />
+            <ButtonComponent labelButton="Limpar" onpress={() => {
+                clearField();
+            }} />
             <ButtonComponent labelButton="Entrar" onpress={() => {
-                loginNavigation.navigate('Home');
+                handleLoginButtonPress();
             }
-        
-        } />
+
+            } />
         </View>
         <View style={styles.lineBreak} />
         <Text style={styles.newAccess}>Ainda não tem seu acesso?</Text>
         <View style={styles.buttonContainerB}>
             <ButtonComponent labelButton="Crie sua conta aqui" onpress={() => {
                 createAccount.navigate('Register');
-                }} />
+            }} />
         </View>
         <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
     </SafeAreaView>
@@ -81,7 +167,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     buttonContainerA: {
-        paddingTop:10,
+        paddingTop: 10,
         justifyContent: "space-between",
         flexDirection: "row",
     },

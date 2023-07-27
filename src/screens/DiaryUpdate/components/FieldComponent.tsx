@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,6 +13,21 @@ const screenDimensions  = Dimensions.get('screen');
 
 export default function FieldComponent() {
 
+    const [formData, setFormData] = useState({
+        infusionDate: '',
+        unity: '',
+        reason: '',
+        infusionLocal: '',
+        treatment: '',
+        observation: ''
+    });
+
+    const handleInfusionDate = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDate: value,
+        }));
+    };
 
     const returnHome = useNavigation();
 
@@ -23,13 +38,9 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: 'Em casa' },
+            { key: '2', value: 'Hemocentro' },
+            { key: '3', value: 'Hospital' },
         ]
 
         return (
@@ -40,7 +51,7 @@ export default function FieldComponent() {
                 search={false}
                 boxStyles={{ borderColor: "#EB0102" }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Selecione a unidade ou local onde foi feito"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
             />
@@ -52,13 +63,10 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: 'Profilaxia' },
+            { key: '2', value: 'Emergência' },
+            { key: '3', value: 'Imunotolerância' },
+            { key: '4', value: 'Cirurgia' }
         ]
 
         return (
@@ -69,7 +77,7 @@ export default function FieldComponent() {
                 search={false}
                 boxStyles={{ borderColor: "#EB0102" }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Selecione o motivo da infusão"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
             />
@@ -81,13 +89,10 @@ export default function FieldComponent() {
         const [selected, setSelected] = React.useState("");
 
         const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
+            { key: '1', value: 'Hermatrose' },
+            { key: '2', value: 'Ferimento / Trauma' },
+            { key: '3', value: 'Local' },
+            { key: '4', value: 'Outros (detalhar na observação)' },
         ]
 
         return (
@@ -98,7 +103,7 @@ export default function FieldComponent() {
                 search={false}
                 boxStyles={{ borderColor: "#EB0102" }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Informe tipo de sangramento"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
             />
@@ -127,7 +132,7 @@ export default function FieldComponent() {
                 search={false}
                 boxStyles={{ borderColor: "#EB0102" }}
                 inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Teste"
+                placeholder="Informe o tratamento feito"
                 dropdownStyles={{ borderColor: "#EB0102" }}
                 dropdownTextStyles={{ color: "#EB0102" }}
 
@@ -185,7 +190,7 @@ const styles = StyleSheet.create({
         borderColor: "#EB0102",
         borderWidth: 1,
         borderRadius: 6,
-        width: screenDimensions.width,
+        width: "100%",
         height: 160,
         color: "#EB0102",
         textAlignVertical: "top",

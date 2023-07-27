@@ -13,9 +13,8 @@ class TopComponent extends React.Component {
                 <Image source={logo} style={styles.image}/>
                 <Text style={styles.welcomeText}>Bem vindo {'\n'} Bernard</Text>
             </View>
-            <Text style={styles.hematologist}>Seu Hematologista é o(a) Dr(a). Clarissa Ferreira</Text>
             <View style={styles.adviceView}>
-                <Text style={styles.adviceText}>Sua infusão foi a 3 dias. {'\n'}Sua próxima infusão será em: 26/05/2023</Text>
+                <Text style={styles.adviceText}>Sua última infusão foi no dia: 26/05/2023</Text>
             </View>
             <View style={styles.lineBreak}/>
 

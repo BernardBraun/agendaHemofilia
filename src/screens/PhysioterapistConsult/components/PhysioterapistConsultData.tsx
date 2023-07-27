@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     bottomText: {
-        paddingTop: 30,
+        paddingTop: 25,
         paddingLeft: 10,
         color: "#000000",
         fontSize: 6
