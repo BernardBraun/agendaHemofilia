@@ -77,6 +77,7 @@ export default function LoginData() {
         loginApp(formData)
             .then((data) => {
                 setIsLoading(false);
+                Alert.alert("Informação","Sua sessão tem validade de 10 minutos.\nApós este tempo, sua sessão será encerrada automaticamente." )
                 loginAccount.navigate('Home');
             })
             .catch((error) => {
