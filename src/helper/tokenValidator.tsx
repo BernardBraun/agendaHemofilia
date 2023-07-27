@@ -8,7 +8,7 @@ export const checkTokenValidity = async () => {
 
     const dataAccess = await AsyncStorage.getItem('dataAccess')
 
-    const tokenExpirationTime = 1 * 60 * 1000;
+    const tokenExpirationTime = 10 * 60 * 1000;
     const dataAccessToken = new Date(dataAccess);
 
     const actualDate = new Date(Date.now());
