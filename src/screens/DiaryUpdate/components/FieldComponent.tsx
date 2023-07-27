@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,6 +13,21 @@ const screenDimensions  = Dimensions.get('screen');
 
 export default function FieldComponent() {
 
+    const [formData, setFormData] = useState({
+        infusionDate: '',
+        unity: '',
+        reason: '',
+        infusionLocal: '',
+        treatment: '',
+        observation: ''
+    });
+
+    const handleInfusionDate = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDate: value,
+        }));
+    };
 
     const returnHome = useNavigation();
 

@@ -23,8 +23,8 @@ export default function FieldComponent() {
         completeName: '',
         birthDate: '',
         height: 0,
-        wieght: 0,
-        hemofiliaType: '',
+        weight: '',
+        hemophiliaType: '',
         email: '',
         inhibitor: false,
         infusionDays: '',
@@ -70,7 +70,7 @@ export default function FieldComponent() {
     const handleWeightChange = (value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            wieght: value,
+            weight: value,
         }));
     };
     const handleCellphoneNumberChange = (value) => {
@@ -172,7 +172,7 @@ export default function FieldComponent() {
     const handleHemophiliaTypeChange = (value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            hemofiliaType: value,
+            hemophiliaType: value,
         }));
     };
 
@@ -211,14 +211,26 @@ export default function FieldComponent() {
           .then((response) => response.json())
           .then((data) => {
             console.log("Resposta da API:", data);
-            Alert.alert("Sucesso!","Seu cadastro foi realizado com sucesso.")
+            Alert.alert(
+                "Sucesso!",
+                "Seu cadastro foi realizado com sucesso.",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {
+                            returnScreen.navigate('Login')
+                        }
+                    }
+                ],
+                { cancelable: false }    
+            )
 
           })
           .catch((error) => {
             console.error("Erro ao enviar o formulário:", error);
             Alert.alert("Erro!","Tente novamente mais tarde.")
           });
-      };
+    };
       
 
     return <KeyboardAvoidingView

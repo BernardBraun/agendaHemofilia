@@ -3,6 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { Alert, StyleSheet, Text, View } from "react-native"
 import { useNavigation } from '@react-navigation/native';
 import ButtonComponent from "./ButtonComponent"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { checkTokenValidity } from "../../../helper/tokenValidator";
 
 export default function MenuComponent() {
     const updateDiary = useNavigation();
@@ -11,14 +13,20 @@ export default function MenuComponent() {
     const hematologistConsult = useNavigation();
     const dentistConsult = useNavigation();
     const physioterapistConsult = useNavigation();
+    const loginScreen = useNavigation();
 
     return <SafeAreaView style={styles.view}>
+
         <View style={styles.buttonContainerA}>
-            <ButtonComponent labelButton="Localize seu Hemocentro" onpress={() => {
+            {/* <ButtonComponent labelButton="Localize seu Hemocentro" onpress={() => {
                 Alert.alert("Aviso", "Função em desenvolvimento")
-            }} />
-            <ButtonComponent labelButton="Atualize seu diário" onpress={() => {
+            }} /> */}
+            <ButtonComponent labelButton="Meu diário" onpress={async () => {
                 updateDiary.navigate('DiaryUpdate')
+                var isValid = (await checkTokenValidity()).valid;
+                if(!isValid){
+                    loginScreen.navigate('Login')
+                }
             }} />
             <ButtonComponent labelButton="Atualize seus dados" onpress={() => {
                 updateRegister.navigate('UpdateRegister')
@@ -26,7 +34,7 @@ export default function MenuComponent() {
             <ButtonComponent labelButton="Inclua / Atualize se houve hermatrose" onpress={() => {
                 bleedInform.navigate('BleedInform')
             }} />
-            <ButtonComponent labelButton="Inclua / Atualize consulta com o Hematologista" onpress={() => {
+            {/* <ButtonComponent labelButton="Inclua / Atualize consulta com o Hematologista" onpress={() => {
                 hematologistConsult.navigate('HematologistConsult')
             }} />
             <ButtonComponent labelButton="Inclua / Atualize consulta com o Dentista" onpress={() => {
@@ -34,7 +42,7 @@ export default function MenuComponent() {
             }} />
             <ButtonComponent labelButton="Inclua / Atualize sessão de Fisioterapia" onpress={() => {
                 physioterapistConsult.navigate('PhysioterapistConsult')
-            }} />
+            }} /> */}
         </View>
         <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
     </SafeAreaView>

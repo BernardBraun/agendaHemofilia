@@ -23,7 +23,7 @@ const Inhibitor = ({onSelect = () => {}}) => {
             search={false}
             boxStyles={{ borderColor: "#EB0102" }}
             inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-            placeholder="Possui inibidor?"
+            placeholder="Selecione se você possui ou não inibidor"
             dropdownStyles={{ borderColor: "#EB0102" }}
             dropdownTextStyles={{ color: "#EB0102" }}
         />
