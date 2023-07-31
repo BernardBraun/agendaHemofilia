@@ -1,6 +1,6 @@
-const BASE_URL = 'http://10.1.11.249:8082/api';
+import {URL_HEMOCENTER} from './baseUrl'
 
 export const fetchHemocenters = () => {
-    const url: string = `${BASE_URL}` + "/hemocenter"
+    const url: string = `${URL_HEMOCENTER}`
     return fetch(url).then(response => response.json())
 }

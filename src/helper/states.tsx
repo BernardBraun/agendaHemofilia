@@ -1,7 +1,7 @@
-const BASE_URL = 'http://10.1.11.249:8082/api'
+import {URL_STATES} from './baseUrl'
 
 export const fetchStates = () => {
-    const url: string = `${BASE_URL}/state`
+    const url: string = `${URL_STATES}`
     return fetch(url).then(response => response.json())
 }
 

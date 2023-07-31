@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ButtonComponent from './ButtonComponent';
-import { loginApp } from '../../../helper/authUtils';
+import { URL_AUTH } from '../../../helper/baseUrl';
 
 export default function LoginData() {
 
@@ -39,10 +39,8 @@ export default function LoginData() {
     }
 
     async function loginApp(formData) {
-
-
-        const BASE_URL = "http://10.1.11.249:8082/auth";
-        const url = `${BASE_URL}/login`;
+        
+        const url = `${URL_AUTH}`;
 
         return fetch(url, {
             method: "POST",
