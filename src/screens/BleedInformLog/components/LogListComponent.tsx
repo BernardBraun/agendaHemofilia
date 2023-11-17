@@ -1,25 +1,51 @@
-import React, {JSXElementConstructor, useState} from "react"
-import {StyleSheet, View, Text} from "react-native"
+import React, {JSXElementConstructor, useEffect, useState} from "react"
+import {StyleSheet, View, Text, Alert} from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import CheckboxComponent from "./CheckboxComponent"
 import registers from "../../../mocks/regiters"
 import ButtonComponent from "./ButtonComponent"
 import CheckBox from "./CheckBox/checkBox"
 import { useNavigation } from "@react-navigation/native"
+import axios from "axios"
+import { URL_BLEEDLOG } from "../../../helper/baseUrl"
 
 const clearField = () => {
-    alert('Campo limpo');
+    Alert.alert('Atenção!','Campo limpo');
 }
 
 
 
 
 export default function LogListComponent() {
-    const Boxes = registers.map(
-        (a, i) => {
-                return <CheckboxComponent id={a.id} date={a.date} time={a.time} local={a.local} />
+    const [data,setData] = useState([]);
+
+    const url = `${URL_BLEEDLOG}`;
+
+    const fetchData = async () => {
+        try {
+          const response = await axios.get(url);
+          const data = response.data;
+          setData(data); // Atualize o estado com os dados buscados
+        } catch (error) {
+          console.error('Erro ao buscar dados:', error);
         }
-    )
+      };
+
+      useEffect(() => {
+        fetchData();
+      }, []);
+
+      const renderCheckboxes = () => {
+        return data.map((a) => (
+          <CheckboxComponent
+            key={a.id}
+            id={a.id}
+            date={a.date}
+            time={a.time}
+            local={a.local}
+          />
+        ));
+      };
 
     const returnScreen = useNavigation();
 
@@ -28,7 +54,7 @@ export default function LogListComponent() {
     return <SafeAreaView >
         <View >
             <CheckBox options={registers} onChange={op=>{alert(op)}}/>
-            {/* <View>{Boxes}</View> */}
+            {renderCheckboxes()}
             <View style={styles.buttonContainer}>
                 <ButtonComponent labelButton="Ver Registro" onpress={clearField}/>
                 <ButtonComponent labelButton="Sair" onpress={() => {

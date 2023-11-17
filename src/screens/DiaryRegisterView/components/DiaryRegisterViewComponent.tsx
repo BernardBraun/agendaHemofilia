@@ -1,37 +1,40 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ButtonComponent from './ButtonComponent'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function DiaryRegisterViewComponent() {
     const returnScreen = useNavigation();
+
+    const route = useRoute();
+    const { date, time, local, reason, bleedTypeLocal, treatment, observation } = route.params;
 
   return(
     <View style={styles.container}>
       <View>
         <Text style={styles.titles}>Data / Hora</Text>
         <View style={styles.borders}>
-            <Text style={styles.info}>25/05/2023 - 10:45:00</Text>
+            <Text style={styles.info}>{date} - {time}</Text>
         </View>
         <Text style={styles.titles}>Unidade</Text>
         <View style={styles.borders}>
-            <Text style={styles.info}>HEMORGS</Text>
+            <Text style={styles.info}>{local}</Text>
         </View>
         <Text style={styles.titles}>Motivo da Infusão</Text>
         <View style={styles.borders}>
-            <Text style={styles.info}>Profilaxia</Text>
+            <Text style={styles.info}>{reason}</Text>
         </View>
         <Text style={styles.titles}>Tipo / Local do Sangramento</Text>
         <View style={styles.borders}>
-            <Text style={styles.info}>Profilaxia</Text>
+            <Text style={styles.info}>{bleedTypeLocal}</Text>
         </View>
         <Text style={styles.titles}>Tratamento</Text>
         <View style={styles.borders}>
-            <Text style={styles.info}>FVIII - 500UI</Text>
+            <Text style={styles.treatment}>{treatment}</Text>
         </View>
         <Text style={styles.titles}>Observação</Text>
         <View style={styles.observation}>
-            <Text style={styles.info}>Aplicação feita pelos pais sob supervisão da enfermeira responsável.</Text>
+            <Text style={styles.info}>{observation}</Text>
         </View>
         <View style={styles.buttonContainer}>
             <ButtonComponent labelButton="Voltar" onpress={() => {
@@ -73,6 +76,15 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         justifyContent: "center",
         fontSize: 24,
+        paddingLeft: 10
+    },
+    treatment: {
+        color: "#EB0102",
+        fontWeight: "bold",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: 14,
+        paddingTop:10,
         paddingLeft: 10
     },
     buttonContainer: {

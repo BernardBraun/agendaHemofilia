@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Alert } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { SelectList } from 'react-native-dropdown-select-list';
@@ -7,64 +7,95 @@ import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "../../commons/DateTimePicker";
 
-const screenDimensions  = Dimensions.get('screen');
+const screenDimensions = Dimensions.get('screen');
 
 export default function BleedInformData() {
 
+    const [formData, setFormData] = useState({
+        bleedDate: '',
+        bleedLocal: '',
+        bleedTreatment: '',
+        observation: ''
+    });
 
-    const clearField = () => {
-        Alert.alert('Campo limpo', 'Campos limpos');
+    const handlebleedDate = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: value
+        }))
+
+    }
+
+    const handlebleedLocal = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: value
+        }))
+
+    }
+
+    const handlebleedTreatment = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: value
+        }))
+
+    }
+
+    const handleObservation = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            login: value
+        }))
+
     }
 
     const bleedLog = useNavigation();
-
     const returnScreen = useNavigation();
 
-    const loginApp = () => {
+    const sendBleedInform = () => {
         Alert.alert('Logando na aplicação', 'Dados validados com sucesso');
     }
 
 
-    return <KeyboardAvoidingView 
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={styles.container}
-        keyboardVerticalOffset={20}>
-            <ScrollView>
-            <Text style={styles.text}>Data / Hora</Text>
-            <DateTimePicker />
-            <Text style={styles.text}>Local de sangramento</Text>
-            <TextInput 
-                style={styles.textInput}
-                multiline={true}
-                numberOfLines={6}
-                keyboardType="default"
-            />
-            <Text style={styles.text}>Medidas Preventivas / Tratativas</Text>
-            <TextInput 
-                style={styles.textInputObserv}
-                multiline={true}
-                numberOfLines={6}
-                keyboardType="default"
-            />
-            <Text style={styles.text}>Observações</Text>
-            <TextInput 
-                style={styles.textInputObserv}
-                multiline={true}
-                numberOfLines={6}
-                keyboardType="default"
-            />
-            <View style={styles.buttonContainer}>
-                <ButtonComponent labelButton="Ver Registros" onpress={() => {
-                    bleedLog.navigate('BleedInformLog')
-                }} />
-                <ButtonComponent labelButton="Voltar" onpress={() => {
-                    returnScreen.navigate('Home')
-                }} />
-                <ButtonComponent labelButton="Salvar" onpress={loginApp} />
-            </View>
-            <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
-            </ScrollView>
-        </KeyboardAvoidingView>
+    return <ScrollView>
+        <Text style={styles.text}>Data / Hora</Text>
+        <DateTimePicker />
+        <Text style={styles.text}>Local de sangramento</Text>
+        <TextInput
+            style={styles.textInput}
+            multiline={true}
+            numberOfLines={6}
+            keyboardType="default"
+            onChangeText={(value) =>handlebleedLocal(value)}
+        />
+        <Text style={styles.text}>Medidas Preventivas / Tratativas</Text>
+        <TextInput
+            style={styles.textInputObserv}
+            multiline={true}
+            numberOfLines={6}
+            keyboardType="default"
+            onChangeText={(value) =>handlebleedTreatment(value)}
+        />
+        <Text style={styles.text}>Observações</Text>
+        <TextInput
+            style={styles.textInputObserv}
+            multiline={true}
+            numberOfLines={6}
+            keyboardType="default"
+            onChangeText={(value) =>handleObservation(value)}
+        />
+        <View style={styles.buttonContainer}>
+            <ButtonComponent labelButton="Ver Registros" onpress={() => {
+                bleedLog.navigate('BleedInformLog')
+            }} />
+            <ButtonComponent labelButton="Voltar" onpress={() => {
+                returnScreen.navigate('Home')
+            }} />
+            <ButtonComponent labelButton="Salvar" onpress={sendBleedInform} />
+        </View>
+        <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
+    </ScrollView>
 }
 
 const styles = StyleSheet.create({

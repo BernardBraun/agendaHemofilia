@@ -15,7 +15,8 @@ export default function TopComponent() {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 10
+        padding: 12,
+        backgroundColor: "#FFF",
     },
     logo: {
         width: 90,

@@ -39,7 +39,7 @@ export default function LoginData() {
     }
 
     async function loginApp(formData) {
-        
+
         const url = `${URL_AUTH}`;
 
         return fetch(url, {
@@ -75,7 +75,7 @@ export default function LoginData() {
         loginApp(formData)
             .then((data) => {
                 setIsLoading(false);
-                Alert.alert("Informação","Sua sessão tem validade de 10 minutos.\nApós este tempo, sua sessão será encerrada automaticamente." )
+                Alert.alert("Informação", "Sua sessão tem validade de 10 minutos.\nApós este tempo, sua sessão será encerrada automaticamente.")
                 loginAccount.navigate('Home');
             })
             .catch((error) => {
@@ -124,7 +124,9 @@ export default function LoginData() {
                 createAccount.navigate('Register');
             }} />
         </View>
-        <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
+        <View>
+            <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
+        </View>
     </SafeAreaView>
 }
 

@@ -3,44 +3,46 @@ import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Icons from "react-native-vector-icons/Foundation"; 
 
-import registers from '../../../../mocks/regiters'
-
-const checkBox = ({options = [], onChange, multiple=false}) => {
+const CheckBox = ({ options = [], onChange, multiple = false }) => {
     const [selected, setSelected] = useState([]);
-    function toggle(id){
-        let index = selected.findIndex((i)=> i === id);
-        let arrSelecteds = [...selected];
-        if(index != -1){
-            arrSelecteds.splice(index, 1)
+  
+    function toggle(id) {
+      let arrSelecteds = [...selected];
+      if (!multiple) {
+        arrSelecteds = [id]; // Se a seleção múltipla não for permitida, substitua a seleção atual
+      } else {
+        let index = arrSelecteds.findIndex((i) => i === id);
+        if (index !== -1) {
+          arrSelecteds.splice(index, 1);
         } else {
-            multiple ? arrSelecteds.push(id) : (arrSelecteds = [id]);
+          arrSelecteds.push(id);
         }
-        setSelected(arrSelecteds)
+      }
+      setSelected(arrSelecteds);
     }
-
-    useEffect(()=>onChange(selected),[selected])
-
-  return (
-    <View style={styles.container}>
-        {options.map((op, index) => (
-            <View style={styles.optionContainer}>
-                <TouchableOpacity 
-                    style={styles.touchable}
-                    onPress={() => toggle(op?.id)}>
-                    {
-                        selected.findIndex(i=> i===op.id) !== -1 ? (
-                            <Icons name="x" style={styles.marker} size={20}/>
-                        ):null
-                    }
-                </TouchableOpacity>
-                <Text style={styles.optext}>{op?.date} - {op?.time} - {op?.local}</Text>
-            </View>
+  
+    useEffect(() => onChange(selected), [selected]);
+  
+    return (
+      <View style={styles.container}>
+        {options.map((op) => (
+          <View key={op.id} style={styles.optionContainer}>
+            <TouchableOpacity
+              style={styles.touchable}
+              onPress={() => toggle(op.id)}
+            >
+              {selected.includes(op.id) ? (
+                <Icons name="x" style={styles.marker} size={20} />
+              ) : null}
+            </TouchableOpacity>
+            <Text style={styles.optext}>{op.label}</Text>
+          </View>
         ))}
-    </View>
-  )
-}
-
-export default checkBox
+      </View>
+    );
+  };
+  
+  export default CheckBox;
 
 const styles = StyleSheet.create({
     container:{
