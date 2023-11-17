@@ -1,34 +1,14 @@
 import React from "react";
 
 import logo from "../../../assets/LogoDiario.png"
-import { loadTop } from "../../../services/loadData";
 import { Image, StyleSheet, View } from "react-native";
 
-class Top extends React.Component {
-    state= {
-        top: {
-            welcome:"",
-            hematologist: "",
-            message: "",
-            days: "",
-            date: ""
-        }
-    }
-
-    updateTop() {
-        const returning = loadTop();
-        this.setState({top: returning})
-    }
-
-    componentDidMount(): void {
-        this.updateTop();
-    }
-
-    render(){
+export default function Top() {
+    
         return <View style={styles.view}>
             <Image style={styles.image} source={logo}/>
         </View>
-    }
+    
 }
 
 const styles = StyleSheet.create ({
@@ -43,5 +23,3 @@ const styles = StyleSheet.create ({
         height: 320,
     }
 })
-
-export default Top;

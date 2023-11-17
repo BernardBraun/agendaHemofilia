@@ -1,15 +1,17 @@
-import React, { useState } from "react"
-import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView } from "react-native"
+import React, { useEffect, useState } from "react"
+import { StyleSheet, Text, View, Dimensions, KeyboardAvoidingView, Alert } from "react-native"
 import { useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SelectList } from 'react-native-dropdown-select-list';
 
 import SelectListComponent from '../../DiaryLog/components/SelectListComponent';
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
 import DateTimePicker from "../../commons/DateTimePicker";
+import { URL_TREATMENT } from "../../../helper/baseUrl";
+import SelectTreatments from "../../commons/SelectTreatments";
 
-const screenDimensions  = Dimensions.get('screen');
+const screenDimensions = Dimensions.get('screen');
 
 export default function FieldComponent() {
 
@@ -21,6 +23,8 @@ export default function FieldComponent() {
         treatment: '',
         observation: ''
     });
+    const [treatments, setTreatments] = useState([]);
+
 
     const handleInfusionDate = (value) => {
         setFormData((prevFormData) => ({
@@ -28,12 +32,42 @@ export default function FieldComponent() {
             infusionDate: value,
         }));
     };
+    const handleUnity = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDate: value,
+        }));
+    };
+    const handleReason = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDate: value,
+        }));
+    };
+    const handleInfusionLocal = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDate: value,
+        }));
+    };
+    const handleObservation = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            infusionDate: value,
+        }));
+    };
+    const handleTreatment = (value) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            treatment: value,
+        }));
+    };
 
     const returnHome = useNavigation();
 
     const diaryUpdaeLog = useNavigation();
 
-    const FirstSelect = () => {
+    const UnitySelect = () => {
 
         const [selected, setSelected] = React.useState("");
 
@@ -109,54 +143,25 @@ export default function FieldComponent() {
             />
         )
     }
+      
 
-    const FourthSelect = () => {
-
-        const [selected, setSelected] = React.useState("");
-
-        const data = [
-            { key: '1', value: 'Mobiles' },
-            { key: '2', value: 'Appliances' },
-            { key: '3', value: 'Cameras' },
-            { key: '4', value: 'Computers' },
-            { key: '5', value: 'Vegetables' },
-            { key: '6', value: 'Diary Products' },
-            { key: '7', value: 'Drinks' },
-        ]
-
-        return (
-            <SelectList
-                setSelected={(val) => setSelected(val)}
-                data={data}
-                save="value"
-                search={false}
-                boxStyles={{ borderColor: "#EB0102" }}
-                inputStyles={{ color: "#EB0102", fontWeight: "bold" }}
-                placeholder="Informe o tratamento feito"
-                dropdownStyles={{ borderColor: "#EB0102" }}
-                dropdownTextStyles={{ color: "#EB0102" }}
-
-            />
-        )
-    }    
-
-    return <KeyboardAvoidingView 
+    return <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
         keyboardVerticalOffset={20}>
-            <ScrollView>
+        <ScrollView>
             <Text style={styles.text}>Data / Hora</Text>
             <DateTimePicker />
             <Text style={styles.text}>Unidade</Text>
-            <FirstSelect />
+            <UnitySelect />
             <Text style={styles.text}>Motivo da Infusão</Text>
             <SecondSelect />
             <Text style={styles.text}>Tipo / Local do Sangramento</Text>
             <ThirdSelect />
             <Text style={styles.text}>Tratamento</Text>
-            <FourthSelect />
+            <SelectTreatments onSelect={handleTreatment}/>
             <Text style={styles.text}>Observações</Text>
-            <TextInput 
+            <TextInput
                 style={styles.textInput}
                 multiline={true}
                 numberOfLines={6}
@@ -174,8 +179,8 @@ export default function FieldComponent() {
                 }} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
-            </ScrollView>
-        </KeyboardAvoidingView>
+        </ScrollView>
+    </KeyboardAvoidingView>
 }
 
 const styles = StyleSheet.create({
@@ -202,8 +207,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     bottomText: {
-        paddingTop: 30,
-        paddingLeft: 10,
+        paddingTop: 10,
         color: "#000000",
         fontSize: 6
     }

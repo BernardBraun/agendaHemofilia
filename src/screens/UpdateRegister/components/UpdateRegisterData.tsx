@@ -9,7 +9,7 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import ButtonComponent from "./ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 
-const screenDimensions  = Dimensions.get('screen');
+const screenDimensions = Dimensions.get('screen');
 
 export default function FieldComponent() {
 
@@ -133,54 +133,50 @@ export default function FieldComponent() {
 
             />
         )
-    }    
+    }
 
-    return <KeyboardAvoidingView 
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={styles.container}
-        keyboardVerticalOffset={20}>
-            <ScrollView>
+
+    return <ScrollView>
             <Text style={styles.text}>Nome completo</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Data de Nascimento</Text>
-            <TextInput inputMode="decimal" style={styles.textInputRegister } />
+            <TextInput inputMode="decimal" style={styles.textInputRegister} />
             <Text style={styles.text}>Altura</Text>
-            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
+            <TextInput inputMode="decimal" style={styles.textInputRegister} />
             <Text style={styles.text}>Peso</Text>
-            <TextInput inputMode="decimal" style={styles.textInputRegister}/>
+            <TextInput inputMode="decimal" style={styles.textInputRegister} />
             <Text style={styles.text}>Tipo da Hemofilia</Text>
             <FourthSelect />
             <Text style={styles.text}>Quantidade de dias para infusão</Text>
             <ThirdSelect />
             <Text style={styles.text}>Celular</Text>
-            <TextInput inputMode="tel" style={styles.textInputRegister}/>
+            <TextInput inputMode="tel" style={styles.textInputRegister} />
             <Text style={styles.text}>E-mail</Text>
-            <TextInput inputMode="email" style={styles.textInputRegister}/>
+            <TextInput inputMode="email" style={styles.textInputRegister} />
             <Text style={styles.text}>Endereço</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Bairro</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Cidade</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Estado</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>CEP</Text>
-            <TextInput inputMode="numeric" style={styles.textInputRegister}/>
+            <TextInput inputMode="numeric" style={styles.textInputRegister} />
             <Text style={styles.text}>Nome da Mãe</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Nome do Pai</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Hemocentro</Text>
-            <TextInput style={styles.textInputRegister}/>
+            <TextInput style={styles.textInputRegister} />
             <Text style={styles.text}>Telefone Hemocentro</Text>
-            <TextInput inputMode="tel" style={styles.textInputRegister}/>
+            <TextInput inputMode="tel" style={styles.textInputRegister} />
             <View style={styles.buttonContainer}>
-                <ButtonComponent labelButton="Sair" onpress={() => {returnScreen.navigate('Home')}} />
+                <ButtonComponent labelButton="Sair" onpress={() => { returnScreen.navigate('Home') }} />
                 <ButtonComponent labelButton="Cadastrar" onpress={clearField} />
             </View>
             <Text style={styles.bottomText}>Copyright {'\u00A9'} Bernard Braun da Silva</Text>
-            </ScrollView>
-        </KeyboardAvoidingView>
+    </ScrollView>
 }
 
 const styles = StyleSheet.create({
@@ -210,7 +206,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingLeft: 10,
-        paddingTop:0,
+        paddingTop: 0,
         paddingBottom: -100
     },
     buttonContainer: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Image, Text, View, StyleSheet, Alert } from 'react-native';
 import logo from '../../../assets/LogoDiario.png';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -21,7 +21,6 @@ class TopComponent extends React.Component {
   
         if (userEmail && token) {
           const url = URL_HOMESCREEN + '/' + userEmail;
-          console.log(url)
   
           fetch(url, {
             method: 'GET',
@@ -53,9 +52,7 @@ class TopComponent extends React.Component {
       }
     }
     
-    
     render() {
-        console.log(this.state)
         const { userName, lastInfusionDate } = this.state;
   
       let message;

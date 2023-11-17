@@ -198,7 +198,7 @@ export default function FieldComponent() {
     const json = JSON.stringify(formData);
 
     const handleRegister = () => {
-        const BASE_URL = "http://10.1.11.249:8082/api";
+        const BASE_URL = "http://10.1.11.3:8080/api";
         const url = `${BASE_URL}/person`;
     
         fetch(url, {
