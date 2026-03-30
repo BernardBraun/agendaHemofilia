@@ -1,84 +1,80 @@
-App desenvolvido para ajudar Hemofilicos a controlar os principais eventos em sua vida no Hemocentro.
+# 🩸 Agenda Hemofilia
 
-Controle das infusões, controle dos principais eventos médicos, localização do seu hemocentro, informativo de sangramento
+Aplicativo mobile desenvolvido para auxiliar pacientes com hemofilia no registro e acompanhamento de aplicações de medicação, substituindo o diário físico tradicional por uma solução digital simples, acessível e organizada.
 
+---
 
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## 🎯 Problema
 
-# Getting Started
+Atualmente, muitos pacientes com hemofilia utilizam um diário físico para registrar aplicações de medicação (como fator VIII ou IX).
+Esse modelo apresenta diversos desafios:
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+* Dificuldade de organização e consulta
+* Risco de perda de informações
+* Falta de padronização
+* Dificuldade para acompanhamento médico
 
-## Step 1: Start the Metro Server
+---
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## 💡 Solução
 
-To start Metro, run the following command from the _root_ of your React Native project:
+O **Agenda Hemofilia** propõe digitalizar esse processo, permitindo:
 
-```bash
-# using npm
-npm start
+* 📌 Registro de aplicações de medicação
+* 🕒 Armazenamento de data e hora
+* 🧾 Controle de lote e validade
+* 📊 Histórico completo e organizado
+* 📤 Possibilidade futura de exportação para médicos
 
-# OR using Yarn
-yarn start
-```
+---
 
-## Step 2: Start your Application
+## 🧠 Origem do Projeto
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Este projeto surgiu a partir de uma necessidade real, vivenciada no dia a dia por um responsável por paciente com hemofilia, buscando melhorar o acompanhamento e a qualidade do tratamento.
 
-### For Android
+---
 
-```bash
-# using npm
-npm run android
+## 🚀 Tecnologias
 
-# OR using Yarn
-yarn android
-```
+### Frontend
 
-### For iOS
+* React Native
+* Expo
 
-```bash
-# using npm
-npm run ios
+### Backend (em evolução)
 
-# OR using Yarn
-yarn ios
-```
+* Atualmente em processo de modernização para arquitetura baseada em BaaS (Backend as a Service)
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+---
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## 🔮 Próximos Passos
 
-## Step 3: Modifying your App
+* 🔐 Autenticação de usuários (paciente/responsável)
+* ☁️ Persistência em nuvem
+* 📄 Exportação de dados (PDF / relatórios)
+* 🔗 Estruturação para interoperabilidade com padrões de saúde (FHIR)
+* 🏥 Possível integração futura com sistemas públicos de saúde (ex: DATASUS)
 
-Now that you have successfully run the app, let's modify it.
+---
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## ⚠️ Status do Projeto
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+🚧 Em desenvolvimento / reestruturação
+Versão inicial funcional já validada localmente
 
-## Congratulations! :tada:
+---
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🤝 Objetivo
 
-### Now what?
+O objetivo deste projeto é evoluir para uma solução que possa:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+* Facilitar o dia a dia de pacientes e responsáveis
+* Melhorar o acompanhamento clínico
+* Contribuir com o ecossistema de saúde digital no Brasil
 
-# Troubleshooting
+---
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## 📬 Contato
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Desenvolvido por Bernard Braun
+Caso tenha interesse em contribuir, validar ou discutir a solução, fique à vontade para entrar em contato.
