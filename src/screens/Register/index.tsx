@@ -1,9 +1,10 @@
 import React from "react";
 
-import RegisterScreen from "./components/RegisterScreen";
+import ScreenContainer from "../commons/ScreenContainer";
+import ResponsiveRegisterScreen from "./components/ResponsiveRegisterScreen";
 
 export default function Register() {
-    return <>
-        <RegisterScreen />
-    </>
+    return <ScreenContainer scrollable={true}>
+        <ResponsiveRegisterScreen />
+    </ScreenContainer>
 }
