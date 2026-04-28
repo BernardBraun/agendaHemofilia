@@ -1,9 +1,10 @@
 import React from "react";
 
-import LoginScreen from "./components/LoginScreen";
+import ScreenContainer from "../commons/ScreenContainer";
+import ResponsiveLoginScreen from "./components/ResponsiveLoginScreen";
 
 export default function Login() {
-    return <>
-        <LoginScreen />
-    </>
+    return <ScreenContainer>
+        <ResponsiveLoginScreen />
+    </ScreenContainer>
 }

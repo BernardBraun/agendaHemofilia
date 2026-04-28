@@ -1,13 +1,16 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppRoutes from './src/routes/AppRoutes';
 
 
 function App() {
   return <>
-    <SafeAreaView style={styles.screen}>
-      <AppRoutes />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <View style={styles.screen}>
+        <AppRoutes />
+      </View>
+    </SafeAreaProvider>
   </>
 }
 
